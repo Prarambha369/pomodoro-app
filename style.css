@@ -1,0 +1,43 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #7f79be;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.app-container {
+    text-align: center;
+}
+
+.circle-container {
+    border: 11px solid #5148e1;
+    border-radius: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 500px;
+    box-sizing: border-box;
+}
+
+.timer {
+    font-size: 3rem;
+    margin: 20px 0;
+}
+
+.btn-start, .btn-reset {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-start:hover, .btn-reset:hover {
+    color: white;
+    background-color: black;
+}
