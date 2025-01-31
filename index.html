@@ -1,22 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Pomodoro App</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="app-container">
-        <div class="circle-container">
-            <h1>Pomodoro Timer</h1>
-            <div class="timer">
-                <div class="minutes">25</div>
-                <div class="seconds">00</div>
-            </div>
-            <button class="btn-start">START</button>
-            <button class="btn-reset">RESET</button>
-        </div>
-    </div>
-    <script src="app.js"></script>
-</body>
-</html>
+                                                 <html lang="en">
+                                                 <head>
+                                                     <title>Pomodoro App</title>
+                                                     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+                                                     <link rel="stylesheet" href="style.css">
+                                                     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+                                                 </head>
+                                                 <body>
+                                                     <div class="app-container">
+                                                         <h1>Pomodoro Timer</h1>
+                                                         <div class="timer">
+                                                             <div class="minutes">25</div>
+                                                             <div class="seconds">00</div>
+                                                         </div>
+                                                         <button class="btn-start">START</button>
+                                                         <button class="btn-pause">PAUSE</button>
+                                                         <button class="btn-resume">RESUME</button>
+                                                         <button class="btn-reset">RESET</button>
+
+                                                         <div class="task-manager">
+                                                             <h2>Task Manager</h2>
+                                                             <input type="text" id="task-input" placeholder="New Task">
+                                                             <button id="add-task">Add Task</button>
+                                                             <ul id="task-list"></ul>
+                                                         </div>
+
+                                                         <div class="statistics">
+                                                             <h2>Statistics</h2>
+                                                             <p>Pomodoros Completed: <span id="pomodoros-completed">0</span></p>
+                                                         </div>
+                                                     </div>
+
+                                                     <div class="draggable-video" id="draggable-video">
+                                                         <h2>Lo-Fi Music</h2>
+                                                         <iframe width="560" height="315" src="https://www.youtube.com/embed/Na0w3Mz46GA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                     </div>
+
+                                                     <audio id="bell-sound" src="https://www.vibrationdata.com/centennial_bell.mp3"></audio>
+                                                     <script src="app.js"></script>
+
+                                                   <footer class="footer">
+                                                         <p>&copy; 2025 Pomodoro App. All rights reserved.</p>
+                                                         <p>Made with <3 by <a href="">MrBashyal</a></p>
+                                                     </footer>
+                                                 </body>
+                                                 </html>

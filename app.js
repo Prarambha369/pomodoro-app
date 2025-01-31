@@ -1,59 +1,137 @@
-let minutes = 25;
-let seconds = 0;
-let interval;
-let pomodoros = 0;
+let timer;
+            let minutes = 25;
+            let seconds = 0;
+            let isPaused = false;
+            let pomodorosCompleted = 0;
 
-const startBtn = document.querySelector('.btn-start');
-const resetBtn = document.querySelector('.btn-reset');
-const minutesDiv = document.querySelector('.minutes');
-const secondsDiv = document.querySelector('.seconds');
+            const minutesDisplay = document.querySelector('.minutes');
+            const secondsDisplay = document.querySelector('.seconds');
+            const startButton = document.querySelector('.btn-start');
+            const pauseButton = document.querySelector('.btn-pause');
+            const resumeButton = document.querySelector('.btn-resume');
+            const resetButton = document.querySelector('.btn-reset');
+            const bellSound = document.getElementById('bell-sound');
+            const pomodorosCompletedDisplay = document.getElementById('pomodoros-completed');
 
-// Function to update the timer display
-function updateTimer() {
-    if (seconds === 0) {
-        if (minutes === 0) {
-            clearInterval(interval);
-            pomodoros++;
-            if (pomodoros % 4 === 0) {
-                // Long break after 4 pomodoros
-                minutes = 15;
-                alert("Time for a long break!");
-            } else {
-                // Short break after each pomodoro
-                minutes = 5;
-                alert("Time for a short break!");
+            startButton.addEventListener('click', startTimer);
+            pauseButton.addEventListener('click', pauseTimer);
+            resumeButton.addEventListener('click', resumeTimer);
+            resetButton.addEventListener('click', resetTimer);
+
+            function startTimer() {
+                if (isPaused) return;
+                timer = setInterval(updateTimer, 1000);
             }
-            seconds = 0;
-            updateDisplay();
-            return;
-        }
-        minutes--;
-        seconds = 59;
-    } else {
-        seconds--;
-    }
-    updateDisplay();
+
+            function pauseTimer() {
+                clearInterval(timer);
+                isPaused = true;
+            }
+
+            function resumeTimer() {
+                if (!isPaused) return;
+                isPaused = false;
+                startTimer();
+            }
+
+            function resetTimer() {
+                clearInterval(timer);
+                minutes = 25;
+                seconds = 0;
+                isPaused = false;
+                updateDisplay();
+            }
+
+            function updateTimer() {
+                if (seconds === 0) {
+                    if (minutes === 0) {
+                        clearInterval(timer);
+                        bellSound.play();
+                        pomodorosCompleted++;
+                        pomodorosCompletedDisplay.textContent = pomodorosCompleted;
+                        resetTimer();
+                        return;
+                    }
+                    minutes--;
+                    seconds = 59;
+                } else {
+                    seconds--;
+                }
+                updateDisplay();
+            }
+
+            function updateDisplay() {
+                minutesDisplay.textContent = minutes < 10 ? '0' + minutes : minutes;
+                secondsDisplay.textContent = seconds < 10 ? '0' + seconds : seconds;
+            }
+
+            // Task Manager
+            const taskInput = document.getElementById('task-input');
+            const addTaskButton = document.getElementById('add-task');
+            const taskList = document.getElementById('task-list');
+
+            addTaskButton.addEventListener('click', addTask);
+function addTask() {
+    const taskText = taskInput.value.trim();
+    if (taskText === '') return;
+
+    const taskItem = document.createElement('li');
+    taskItem.textContent = taskText;
+
+    const checkButton = document.createElement('button');
+    checkButton.textContent = 'Done';
+    checkButton.classList.add('btn-done');
+    checkButton.style.backgroundColor = '#ff0'; // Yellow color
+    checkButton.style.color = '#000';
+    checkButton.addEventListener('click', () => {
+        taskItem.classList.toggle('completed');
+    });
+
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'Remove';
+    removeButton.classList.add('btn-remove');
+    removeButton.style.backgroundColor = '#f00'; // Red color
+    removeButton.style.color = '#fff';
+    removeButton.addEventListener('click', () => {
+        taskList.removeChild(taskItem);
+    });
+
+    taskItem.appendChild(checkButton);
+    taskItem.appendChild(removeButton);
+    taskList.appendChild(taskItem);
+
+    taskInput.value = '';
 }
+            // Make the video section draggable
+            dragElement(document.getElementById("draggable-video"));
 
-// Function to update the timer display
-function updateDisplay() {
-    minutesDiv.textContent = minutes < 10 ? '0' + minutes : minutes;
-    secondsDiv.textContent = seconds < 10 ? '0' + seconds : seconds;
-}
+            function dragElement(element) {
+                let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                element.onmousedown = dragMouseDown;
 
-// Event listener for the start button
-startBtn.addEventListener('click', () => {
-    if (interval) {
-        clearInterval(interval);
-    }
-    interval = setInterval(updateTimer, 1000);
-});
+                function dragMouseDown(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    document.onmouseup = closeDragElement;
+                    document.onmousemove = elementDrag;
+                }
 
-// Event listener for the reset button
-resetBtn.addEventListener('click', () => {
-    clearInterval(interval);
-    minutes = 25;
-    seconds = 0;
-    pomodoros = 0;
-    updateDisplay();
-});
+                function elementDrag(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    pos1 = pos3 - e.clientX;
+                    pos2 = pos4 - e.clientY;
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    element.style.top = (element.offsetTop - pos2) + "px";
+                    element.style.left = (element.offsetLeft - pos1) + "px";
+                }
+
+                function closeDragElement() {
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+                }
+            }
+

@@ -1,43 +1,198 @@
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #7f79be;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://steamuserimages-a.akamaihd.net/ugc/941699520639318064/B30FDC786E112747191946B2E3C783731F810FA0/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
 
-.app-container {
-    text-align: center;
-}
+        .app-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
 
-.circle-container {
-    border: 11px solid #5148e1;
-    border-radius: 50%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 500px;
-    height: 500px;
-    box-sizing: border-box;
-}
+        .timer {
+            font-size: 48px;
+            margin: 20px 0;
+            text-shadow: 0 0 10px #0ff;
+        }
 
-.timer {
-    font-size: 3rem;
-    margin: 20px 0;
-}
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+            text-shadow: 0 0 5px #000;
+            box-shadow: 0 0 10px #0ff;
+        }
 
-.btn-start, .btn-reset {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-top: 10px;
-}
+        .btn-start {
+            background-color: #0f0;
+        }
 
-.btn-start:hover, .btn-reset:hover {
-    color: white;
-    background-color: black;
-}
+        .btn-pause {
+            background-color: #ff0;
+        }
+
+        .btn-resume {
+            background-color: #00f;
+        }
+
+        .btn-reset {
+            background-color: #f00;
+        }
+
+        .task-manager {
+            margin-top: 20px;
+        }
+
+        #task-input {
+            padding: 10px;
+            font-size: 16px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #0ff;
+            border: 1px solid #0ff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #0ff;
+            width: calc(100% - 42px); /* Adjust width to fit within the container */
+            margin-bottom: 10px; /* Add some space below the input field */
+        }
+
+        #add-task {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+            background-color: #0f0;
+            color: #fff;
+            text-shadow: 0 0 5px #000;
+            box-shadow: 0 0 10px #0ff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+       #task-list {
+           list-style-type: none;
+           padding: 0;
+           max-height: 200px; /* Set a maximum height */
+           overflow-y: auto; /* Enable vertical scrolling */
+       }
+
+        #task-list li {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #0ff;
+            box-shadow: 0 0 10px #0ff;
+        }
+
+        #task-list li.completed {
+            text-decoration: line-through;
+            color: #ff0;
+            text-shadow: 0 0 10px #ff0;
+            background: rgba(255, 255, 0, 0.2); /* Light yellow background */
+            box-shadow: 0 0 10px #ff0;
+        }
+
+        .statistics {
+            margin-top: 20px;
+            color: #0ff;
+            text-shadow: 0 0 10px #0ff;
+        }
+
+        #task-list li button {
+            background: none;
+            border: none;
+            color: #0ff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            text-shadow: 0 0 5px #000;
+        }
+
+        .video-section {
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+.draggable-video {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    cursor: move;
+    z-index: 1000;
+    position: absolute; /* Use absolute positioning */
+
+    .footer {
+        background: rgba(0, 0, 0, 0.8);
+        color: #0ff;
+        text-align: center;
+        padding: 20px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        box-shadow: 0 -2px 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .footer {
+        background: rgba(0, 0, 0, 0.8);
+        color: #0ff;
+        text-align: center;
+        padding: 20px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        box-shadow: 0 -2px 10px rgba(0, 255, 255, 0.5);
+        text-shadow: 0 0 5px #0ff;
+        box-shadow: 0 0 20px #0ff; /* Neon effect */
+    }
+
+    .footer a {
+        color: #0ff;
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+    #task-list li .btn-done {
+        background-color: #ff0; /* Yellow color */
+        color: #000;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 10px;
+        text-shadow: 0 0 5px #000;
+        box-shadow: 0 0 10px #ff0; /* Neon effect */
+        border: none;
+        border-radius: 5px;
+    }
+
+    #task-list li .btn-remove {
+        background-color: #f00; /* Red color */
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 10px;
+        text-shadow: 0 0 5px #000;
+        box-shadow: 0 0 10px #f00; /* Neon effect */
+        border: none;
+        border-radius: 5px;
+        }}
